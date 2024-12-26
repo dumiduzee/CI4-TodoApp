@@ -46,6 +46,7 @@ class Login extends Controller{
                 $login_model = new LoginModel();
                 $login_model_result = $login_model->UserLogin($validated_fields);
                 if($login_model_result){
+                    $this->session->setTempdata("email",$this->request->getVar("email",FILTER_SANITIZE_EMAIL),3600);
                     return redirect("dashboard");
                 }else{
                     $this->session->setTempdata("login_error","User credentials not found please register ",3);
