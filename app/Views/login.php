@@ -7,6 +7,15 @@
 <!-- Login Form -->
     <div class="login-container">
         <div class="form-header">Login</div>
+
+        <!-- credentials wrong message -->
+        <?php
+        if($local_session->getTempdata('login_error')):?>
+            <p class="d-flex justify-content-center text-success"><?=$local_session->getTempdata('login_error')?>
+        
+        <?php endif;?>
+
+        <!-- //account create and login message -->
         <?php
         if($local_session->getTempdata('success')):?>
             <p class="d-flex justify-content-center text-success"><?=$local_session->getTempdata('success')?></p>

@@ -110,6 +110,7 @@
 
                 </ul> -->
                 <a href="<?=base_url();?>register"><button class="btn btn-custom2 ms-3">Sign Up</button></a>
+                <a href="<?=base_url();?>login"><button class="btn btn-custom2 ms-3">Login</button></a>
             </div>
         </div>
     </nav>

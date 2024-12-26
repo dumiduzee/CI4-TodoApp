@@ -6,9 +6,13 @@ use App\Models\LoginModel;
 
 class Login extends Controller{
 
+    public $session;
+
 
     public function __construct(){
         helper(["form","password"]);
+        $this->session = session();
+
 
     }
     public function index(){
@@ -17,9 +21,10 @@ class Login extends Controller{
         if($this->request->is('post')){
             $validate_data = [
                 "email"=>[
-                    "rules"=>"required",
+                    "rules"=>"required|valid_email",
                     "errors"=>[
-                        "required"=>"all fields are required"
+                        "required"=>"all fields are required",
+                        "valid_email"=>"valid email required"
                     ]
                     ],
                 "password"=>[
@@ -43,7 +48,8 @@ class Login extends Controller{
                 if($login_model_result){
                     echo "ssame";
                 }else{
-                    echo "not";
+                    $this->session->setTempdata("login_error","User credentials not found please register ",3);
+                    return redirect('login');
                 }
                 
                 
