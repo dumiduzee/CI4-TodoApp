@@ -10,7 +10,7 @@ class Login extends Controller{
 
 
     public function __construct(){
-        helper(["form","password"]);
+        helper(["form","password","validatefield"]);
         $this->session = session();
 
 
@@ -18,6 +18,7 @@ class Login extends Controller{
     public function index(){
 
         $data = [];
+        $data['valiated_error'] = null;
         if($this->request->is('post')){
             $validate_data = [
                 "email"=>[
@@ -35,7 +36,6 @@ class Login extends Controller{
                     ]
                 ];
             if (!$this->validate($validate_data)) {
-                echo "validate erros";
                 $data['valiated_error'] = $this->validator->getErrors();
                 return view('login',$data);
             }else{
@@ -46,7 +46,7 @@ class Login extends Controller{
                 $login_model = new LoginModel();
                 $login_model_result = $login_model->UserLogin($validated_fields);
                 if($login_model_result){
-                    echo "ssame";
+                    return redirect("dashboard");
                 }else{
                     $this->session->setTempdata("login_error","User credentials not found please register ",3);
                     return redirect('login');
@@ -55,7 +55,7 @@ class Login extends Controller{
                 
             }
         }
-        echo view('login');
+        echo view('login',$data);
 
     }
 }

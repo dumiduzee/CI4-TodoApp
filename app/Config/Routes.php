@@ -10,5 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->add('login', 'Login::index');
 $routes->add('register', 'Register::index');
+$routes->add('dashboard', 'dashboard::index');
+
 
 

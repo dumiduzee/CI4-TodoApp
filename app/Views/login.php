@@ -9,10 +9,10 @@
         <div class="form-header">Login</div>
 
         <!-- credentials wrong message -->
+
         <?php
         if($local_session->getTempdata('login_error')):?>
-            <p class="d-flex justify-content-center text-success"><?=$local_session->getTempdata('login_error')?>
-        
+            <p class="d-flex justify-content-center text-danger"><?=$local_session->getTempdata('login_error')?>
         <?php endif;?>
 
         <!-- //account create and login message -->
@@ -24,10 +24,16 @@
             <div class="mb-3">
                 <!-- <label for="email" class="form-label">Email</label> -->
                 <input type="text" class="form-control" id="email" placeholder="Enter your email" name="email">
+                <?php if($valiated_error): ?>
+                <pre class="text-danger"><?=validate_filed_erros($valiated_error,"email") ?></pre> 
+                <?php endif; ?>
             </div>
             <div class="mb-4">
                 <!-- <label for="password" class="form-label">Password</label> -->
                 <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password">
+                <?php if($valiated_error): ?>
+                <pre class="text-danger"><?=validate_filed_erros($valiated_error,"password") ?></pre> 
+                <?php endif; ?>
             </div>
             <button type="submit" class="btn btn-custom">Login</button>
         </form>
