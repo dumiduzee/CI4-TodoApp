@@ -19,9 +19,24 @@ class DashboardModel extends Model{
     }
 
     public function creteDummyTodo(string $useremail){
+        
         $builder = $this->db->table("todo");
-        $result = $builder->insert(["email"=>$useremail,"todo"=>"This is sample todo"]);
-        return $result;
+        //check if todo exists or not
+        if($builder->getWhere(["email"=>$useremail])->getNumRows() == 0){
+        $builder->insert(["email"=>$useremail,"todo"=>"This is sample todo"]);
+        }
+    }
+
+    public function getAllTodo(string $useremail){
+        $builder = $this->db->table("todo");
+        $query = $builder->getWhere(["email"=>$useremail]);
+        if($query->getNumRows() > 0){
+            return $query->getResult();
+        }else{
+            return null;
+        }
+
+
     }
 
 }
