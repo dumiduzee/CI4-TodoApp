@@ -15,7 +15,6 @@ class LoginModel extends Model{
     public function UserLogin(array $userdata) {
         try {
             $builder = $this->db->table('users');
-            
             $query = $builder->getWhere($userdata);
             $result = $query->getRowArray();
             
