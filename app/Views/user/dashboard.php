@@ -1,3 +1,5 @@
+<?php $local_session = session(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +112,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+                        <a href="<?=base_url()?>login"><button class="btn btn-outline-light">Logout</button></a>
                     </li>
                 </ul>
             </div>
@@ -120,9 +122,12 @@
 
     <div class="container">
         <div class="add-todo-form">
+        <form action="dashboard/addtodo" method="post">
             <div class="input-group">
-                <input type="text" class="form-control" id="todoInput" placeholder="Add a new task..." aria-label="Add a new task">
-                <button class="btn btn-custom" onclick="addTodo()">Add</button>
+                <input type="hidden" value="<?=$local_session->getTempdata("email")?>" name="email">
+                <input type="text" class="form-control" id="todoInput" name="todoitem" placeholder="Add a new task..." aria-label="Add a new task" >  
+                <button class="btn btn-custom" type="submit" >Add</button>
+                </form>
             </div>
         </div>
         <div id="todoList">
@@ -135,7 +140,9 @@
                
                     <i class="fas fa-edit" style="color: #1E3A8A;" onclick="editTodo()"></i>
                
-                    <i class="fas fa-trash" style="color: #e74c3c;" onclick="deleteTodo()"></i>
+                    <form method="get" action="<?= site_url('dashboard/delete/1') ?>">
+                        <button type="submit" ><i class="fas fa-trash" style="color: #e74c3c;" "></i></button>
+                    </form>
                   
                     <i class="fas fa-check" style="color: #2ecc71;" onclick="markAsDone()"></i>
                 </div>
