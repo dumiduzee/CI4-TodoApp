@@ -23,13 +23,17 @@ class AddTodo extends Controller{
             }
         }else{
             return redirect("dashboard");
+
+            
         }
     }
 
     public function deleteTodo($id){
-        echo $id;
-        return redirect("dashboard");
-
-
+        if($id){
+            $this->todoModel->deleteTodo(["id"=>$id]);
+        }
+        return redirect('dashboard');
     }
+
+    
 }

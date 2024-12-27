@@ -13,6 +13,10 @@ $routes->add('register', 'Register::index');
 $routes->add('dashboard', 'dashboard::index');
 $routes->add('dashboard/addtodo', 'AddTodo::addTodoItem');
 $routes->get('dashboard/delete/(:any)', 'AddTodo::deleteTodo/$1');
+$routes->add('dashboard/edittodo', 'EditTodo::edittodoitem');
+$routes->add('EditTodo/editItem', 'EditTodo::editItem');
+
+
 
 
 

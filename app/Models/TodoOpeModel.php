@@ -16,4 +16,13 @@ class TodoOpeModel extends Model{
         $result = $this->builder_->insert($usertododata);
         return $result;
     }
+
+    public function deleteTodo(array $data){
+        $this->builder_->delete($data);
+    }
+
+    public function editTodo($id,$todo_data){
+        
+        
+    }
 }

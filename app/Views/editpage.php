@@ -127,40 +127,17 @@ use CodeIgniter\HTTP\SiteURI;
 
     <div class="container">
         <div class="add-todo-form">
-        <form action="dashboard/addtodo" method="post">
+        <form action="<?=base_url()?>EditTodo/editItem" method="post">
             <div class="input-group">
-                <input type="hidden" value="<?=$local_session->getTempdata("email")?>" name="email">
-                <input type="text" class="form-control" id="todoInput" name="todoitem" placeholder="Add a new task..." aria-label="Add a new task" >  
-                <button class="btn btn-custom" type="submit" >Add</button>
+
+                <input type="text" class="form-control" id="todoInput" name="todoitem"  value="<?= isset($tododata) ? $tododata : '' ?>" placeholder="Add a new task..." aria-label="Add a new task" >  
+                <input type="hidden" value="<?= isset($todoid) ? $todoid : '' ?>  name="todoid">
+                <button class="btn btn-custom" type="submit" >Edit Todo</button>
+                
                 </form>
             </div>
         </div>
-        <div id="todoList">
-          <?php if($todos): ?>
-          <?php foreach($todos as $todo): ?>
-            <div class="todo-box mt-4">
-                <p><?=$todo->todo?></p>
-
-                <div class="todo-actions">
-                    
-                    <form method="post" action="dashboard/edittodo">
-                        <input name="tododata" value="<?=old("tododata",$todo->todo)?>" type="hidden" >
-                        <input name="todoid" value="<?=old("todoid",$todo->id)?>" type="hidden" >
-
-                    <button type="submit" border-0 bg-transparent m-0 p-0><i class="fas fa-edit" style="color: #1E3A8A;"></i></button>
-                    </form>
-                
-                    <form method="get" class="m-0 p-0" action="<?=site_url('dashboard/delete/') .$todo->id?>">
-                    <button class="border-0 bg-transparent m-0 p-0"  ><i class="fas fa-trash" style="color: #e74c3c;"></i></button>
-                    </form>
-                  
-                    <i class="fas fa-check" style="color: #2ecc71;" onclick="markAsDone()"></i>
-                </div>
-            </div>
-
-          <?php endforeach; ?>
-          <?php endif; ?>      
-        </div>
+        
 
     </div>
 
